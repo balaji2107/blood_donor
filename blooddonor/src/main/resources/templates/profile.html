@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="profile">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/css/profile.css}">
+
+</head>
+<body>
+	<div class="container">
+		<div class="leftbox">
+			<div class="profile-picture">
+				<img src="avatar.png" id="proimage" alt="ProfPictureile ">
+				<img src="pen.png" class="change-photo-button" id="my_img"
+					alt="Profile Picture"
+					style="width: 40px; height: 40px; cursor: pointer"> <input
+					type="file" id="my_file" style="display: none;" />
+			</div>
+		</div>
+		<div class="rightbox">
+			<div class="profile">
+				<h1>
+					Personal Info <i class="fa fa-pencil-square-o"
+						style="cursor: pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+				</h1>
+				<h2>Full Name</h2>
+				<p>Hassnain Haider</p>
+				<h2>Date Of Birth</h2>
+				<p>25-03-2003</p>
+				<h2>Gender</h2>
+				<p>Male</p>
+				<h2>Mobile</h2>
+				<p>+91 987654321</p>
+				<h2>Email</h2>
+				<p>example@example.com</p>
+				<h2>Password</h2>
+				<p>
+					********
+					<button class="btn">Change</button>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div th:replace="editprofile :: editProfile"></div>
+	<script>
+	  document.getElementById('my_img').addEventListener('click', function(event) {
+      	document.getElementById('my_file').click();
+      	 
+      })
+      document.getElementById('my_file').addEventListener('change',function(event) {
+          	 var file = event.target.files[0];
+               var reader = new FileReader();
+
+               reader.onload = function(e) {
+                   var imageSrc = e.target.result;
+                   localStorage.setItem('image', imageSrc); 
+                   document.getElementById('proimage').src = localStorage.getItem("image");
+               };	
+
+               reader.readAsDataURL(file);
+          })
+	</script>
+</body>
+</html>
