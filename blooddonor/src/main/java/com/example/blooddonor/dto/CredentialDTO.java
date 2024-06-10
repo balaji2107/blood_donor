@@ -15,5 +15,4 @@ public class CredentialDTO {
     private String email;
     private String password;
     private String role;
-    private User user;
 }

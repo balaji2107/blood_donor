@@ -33,7 +33,8 @@ public class Credential {
     @Column(nullable = false)
     private String role;
 
-    @OneToOne(mappedBy = "credential")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
 }

@@ -14,15 +14,15 @@
 <body>
 	<div class="container">
 		<h2>New Register</h2>
-		<form th:action="@{/addUser}" th:object="${userDTO}" method="post">
+		<form th:action="@{/addUser}"  method="post">
 			<input type="text" name="username" placeholder="Enter Username">
 			<input type="email" name="email" placeholder="Enter Email..">
 			<input type="text" name="mobileNo" placeholder="Enter Mobile No..">
 			<input th:object="${credentialDTO}" type="password" name="password" placeholder="Enter Password..">
 			<input type="password" name="confirmPassword"
 				placeholder="Please Re-enter Password.."> <select
-				th:object="${credentialDTO}" class="form-select" name="role" aria-label="Default select example">
-				<option selected>--Select--</option>
+				class="form-select" name="role" aria-label="Default select example">
+				<option value="" selected>--Select--</option>
 				<option value="1">Patient</option>
 				<option value="2">Blood Donor</option>
 			</select> <input type="submit" value="Submit">

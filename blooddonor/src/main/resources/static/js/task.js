@@ -13,6 +13,17 @@ $(document).ready(
 			});
 	});
 
+	window.onload = function() {
+            var showWindow = true;
+
+            if (showWindow) {
+                document.getElementById('myWindow').style.display = 'block';
+            } else {
+                document.getElementById('myWindow').style.display = 'none';
+            }
+    };
+
+
 
 
 

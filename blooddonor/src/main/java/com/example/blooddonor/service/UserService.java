@@ -25,13 +25,14 @@ public class UserService implements IUserService{
 
 
 	    @Override
-	    public String addUser(UserDTO userDTO,CredentialDTO credentialDTO) {
+		public String addUser(UserDTO userDTO) {
 			User user = UserMapper.toEntity(userDTO);
-			Credential credential=UserMapper.toCred(credentialDTO);
-	        userRepository.save(user);
+			Credential credential = UserMapper.toCred(userDTO,user);
+			userRepository.save(user);
+			credential.setUser(user);
 			credentialRepo.save(credential);
-	        return user.getUsername();
-	    }
+			return user.getUsername();
+		}
 
 	    @Override
 	    public List<UserDTO> getUser() {
@@ -44,5 +45,11 @@ public class UserService implements IUserService{
 
 	        return userDTOS;
 	    }
+
+	@Override
+	public Credential authenticate(String email, String password) {
+		Credential credential = credentialRepo.findByEmail(email);
+		return credential;
+	}
 
 }

@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
-        @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "mobileNo")
 })
 @Data
@@ -31,11 +30,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Email(message = "Email should be valid")
-    @NotEmpty(message = "Email is required")
-    @Column(nullable = false, unique = true)
-    private String email;
-
     @NotEmpty(message = "Mobile number is required")
     @Column(nullable = false, unique = true)
     private String mobileNo;
@@ -45,6 +39,9 @@ public class User {
 
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
+    private boolean flag=false;
 
     @PrePersist
     protected void onCreate() {
@@ -56,7 +53,7 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "credential_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Credential credential;
+
 }

@@ -21,9 +21,16 @@ public class RoutingController {
 	}
 
 	@RequestMapping("/home")
-	public String home(@RequestParam(name = "fragmentToLoad") String fragmentToLoad, Model model, HttpSession session) {
+	public String home(@RequestParam(name = "fragmentToLoad") String fragmentToLoad,Model model, HttpSession session) {
+		boolean flag = (boolean) session.getAttribute("flag");
 		session.setAttribute("role", "donor");
+		model.addAttribute("flag", flag);
 		model.addAttribute("fragmentToLoad", fragmentToLoad);
 		return "home";
+	}
+	@RequestMapping("/eligibleDonor")
+	public String eligibleForm(Model model, HttpSession session) {
+		session.setAttribute("flag", true);
+		return "redirect:/home?fragmentToLoad=profile";
 	}
 }

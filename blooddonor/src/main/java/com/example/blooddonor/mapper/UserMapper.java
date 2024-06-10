@@ -10,28 +10,24 @@ public class UserMapper {
 	 public static UserDTO toDto(User user) {  
 	        return UserDTO.builder()
 	                .username(user.getUsername())
-	                .email(user.getEmail())
 					.mobileNo(user.getMobileNo())
-					.credential(user.getCredential())
 	                .build();
 	    }
 
 	    public static User toEntity(UserDTO userDTO) {
-	        return User.builder()
-	                .username(userDTO.getUsername())
-	                .email(userDTO.getEmail())
+			return User.builder()
+					.username(userDTO.getUsername())
 					.mobileNo(userDTO.getMobileNo())
-					.credential(userDTO.getCredential())
-	                .build();
+					.build();
 	    }
 
 
-	public static Credential toCred(CredentialDTO credentialDTO) {
+	public static Credential toCred(UserDTO userDTO,User user) {
 		return Credential.builder()
-				.email(credentialDTO.getEmail())
-				.role(credentialDTO.getRole())
-				.user(credentialDTO.getUser())
-				.password(credentialDTO.getPassword())
+				.email(userDTO.getEmail())
+				.password(userDTO.getPassword())
+				.role(userDTO.getRole())
+				.user(user)
 				.build();
 	}
 }

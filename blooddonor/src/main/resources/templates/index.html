@@ -9,9 +9,9 @@
 <body>
 <div class="container">
     <h2>Login</h2>
-    <form th:action="@{/home?fragmentToLoad=dashboard}" method="post">
-        <input type="text" name="username" placeholder="Username" >
-        <input type="password" name="password" placeholder="Password" >
+    <form action="login" method="post">
+        <input type="email" name="email" placeholder="Enter Email" >
+        <input type="password" name="password" placeholder="Enter Password" >
         <input type="submit" value="Login">
     </form>
 	 <p>New to Donor?</p><a th:href="@{/register}">Create an account</a>   
