@@ -56,6 +56,7 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Eligibility Criteria</h5>
             </div>
             <div class="modal-body">
+                <p id="error" style="color:red"></p>
                 <form action="/eligibleDonor" id="employeeForm">
                     <div class="modal-body">
                         <div class="form-group">
@@ -87,7 +88,7 @@
                                 <option value="diabetes">Diabetes</option>
                                 <option value="cancer">Cancer</option>
                                 <option value="pressure">Blood Pressure</option>
-                                <option value="no">No other</option>
+                                <option value="no-other">No other</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -116,12 +117,15 @@
 </script>
 <script>
     var selectInputs = document.querySelectorAll(".form-select");
+    var error=document.getElementById("error");
     var button=document.getElementById("addEligible");
     selectInputs.forEach(function(selectInput) {
         selectInput.addEventListener("change", function() {
             if (checkAllSelected()) {
+                error.innerText="";
                 button.disabled = false;
             } else {
+                error.innerText="You are Not Eligible";
                 button.disabled = true;
             }
         });
@@ -130,7 +134,12 @@
         var allSelected = true;
         selectInputs.forEach(function(selectInput) {
             if (selectInput.value === "select") {
+               error.innerText="";
                 allSelected = false;
+            }
+            else if(selectInput.value === "yes"){
+                error.innerText="You are Not Eligible";
+                allSelected=false;
             }
         });
         return allSelected;
