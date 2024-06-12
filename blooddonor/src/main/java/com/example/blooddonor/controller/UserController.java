@@ -3,7 +3,9 @@ package com.example.blooddonor.controller;
 import java.util.List;
 
 import com.example.blooddonor.dto.CredentialDTO;
+import com.example.blooddonor.dto.EligibleDTO;
 import com.example.blooddonor.model.Credential;
+import com.example.blooddonor.model.Eligible;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.blooddonor.dto.UserDTO;
 import com.example.blooddonor.service.IUserService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -37,16 +40,34 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(CredentialDTO credential,HttpSession session)  {
+    public String login(CredentialDTO credential)  {
         String email = credential.getEmail();
         String password = credential.getPassword();
         Credential credential1=userBusinessService.authenticate(email,password);
         if(credential1 != null){
-            boolean flag=credential1.getUser().isFlag();
-            session.setAttribute("flag",flag);
             return "redirect:/home?fragmentToLoad=dashboard";
         }else
          return "redirect:/login";
+    }
+
+    @PostMapping("/eligibleDonor")
+    public String eligibleForm(EligibleDTO eligibleDTO, RedirectAttributes redirectAttributes) {
+        Eligible addEligible=userBusinessService.healthDetails(eligibleDTO);
+        if (addEligible!=null) {
+                redirectAttributes.addFlashAttribute("userEligible", addEligible);
+                return "redirect:/home?fragmentToLoad=profile";
+        }
+        return "redirect:/home?fragmentToLoad=profile";
+    }
+
+    @GetMapping("/getValue")
+    public String getValueInProfile(RedirectAttributes redirectAttributes){
+        Eligible eligible=userBusinessService.getUserEligible();
+        if(eligible!=null){
+            redirectAttributes.addFlashAttribute("userEligible", eligible);
+            return "redirect:/home?fragmentToLoad=profile";
+        }
+        return "redirect:/home?fragmentToLoad=profile";
     }
 
 }

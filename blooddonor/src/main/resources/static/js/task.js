@@ -1,7 +1,6 @@
 /**
  * 
  */
-var addUser = document.getElementById("userAdd");
 $(document).ready(
 	function() {
 		var table = $('#example').DataTable(
@@ -12,20 +11,6 @@ $(document).ready(
 
 			});
 	});
-
-	window.onload = function() {
-            var showWindow = true;
-
-            if (showWindow) {
-                document.getElementById('myWindow').style.display = 'block';
-            } else {
-                document.getElementById('myWindow').style.display = 'none';
-            }
-    };
-
-
-
-
 
 /*document.addEventListener("DOMContentLoaded", function() {
 		   var hideButton = document.getElementById("checkin");
@@ -51,4 +36,26 @@ $(document).ready(
 	   });
 */
 
+    var selectInputs = document.querySelectorAll(".form-select");
+    var error=document.getElementById("error");
+    var button=document.getElementById("addEligible");
+    selectInputs.forEach(function(selectInput) {
+        selectInput.addEventListener("change", function() {
+            if (checkAllSelected()) {
+                button.disabled = false;
+            } else {
+                button.disabled = true;
+            }
+        });
+    });
+    function checkAllSelected() {
+        var allSelected = true;
+        selectInputs.forEach(function(selectInput) {
+            if (selectInput.value === "select") {
+               error.innerText="";
+                allSelected = false;
+            }
+        });
+        return allSelected;
+    }
 

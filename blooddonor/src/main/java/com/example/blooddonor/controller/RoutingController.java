@@ -1,5 +1,6 @@
 package com.example.blooddonor.controller;
 
+import com.example.blooddonor.model.Eligible;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +23,14 @@ public class RoutingController {
 
 	@RequestMapping("/home")
 	public String home(@RequestParam(name = "fragmentToLoad") String fragmentToLoad,Model model, HttpSession session) {
-		boolean flag = (boolean) session.getAttribute("flag");
+		Object getEligible=model.asMap().get("userEligible");
+		if(getEligible!=null) {
+			Eligible eligible=(Eligible)getEligible;
+			model.addAttribute("eligibles", eligible);
+		}
 		session.setAttribute("role", "donor");
-		model.addAttribute("flag", flag);
 		model.addAttribute("fragmentToLoad", fragmentToLoad);
 		return "home";
 	}
-	@RequestMapping("/eligibleDonor")
-	public String eligibleForm(Model model, HttpSession session) {
-		session.setAttribute("flag", true);
-		return "redirect:/home?fragmentToLoad=profile";
-	}
+
 }

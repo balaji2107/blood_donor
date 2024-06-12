@@ -1,9 +1,12 @@
 package com.example.blooddonor.mapper;
 
-import com.example.blooddonor.dto.CredentialDTO;
+import com.example.blooddonor.dto.EligibleDTO;
 import com.example.blooddonor.dto.UserDTO;
 import com.example.blooddonor.model.Credential;
+import com.example.blooddonor.model.Eligible;
 import com.example.blooddonor.model.User;
+
+import java.util.Optional;
 
 public class UserMapper {
 	
@@ -29,5 +32,15 @@ public class UserMapper {
 				.role(userDTO.getRole())
 				.user(user)
 				.build();
+	}
+
+	public static Eligible toEligible(EligibleDTO eligibleDTO, User user) {
+		 return Eligible.builder()
+				 .isWeight(eligibleDTO.getIsWeight())
+				 .isTransmittableDisease(eligibleDTO.getIsTransmittableDisease())
+				 .disease(eligibleDTO.getDisease())
+				 .isAsthama(eligibleDTO.getIsAsthama())
+				 .user(user)
+				 .build();
 	}
 }

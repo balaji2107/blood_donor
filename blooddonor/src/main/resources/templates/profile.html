@@ -2,102 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="profile">
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" th:href="@{/css/profile.css}">
-
+<link rel="stylesheet" href="/css/profile.css">
 </head>
-<style>
-	.container {
-      background: #fff;
-      width: 900px;
-      height: 545px;
-      margin: 0 auto;
-      position: relative;
-      margin-top: 2%;
-      box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
-    }
-    .active {
-      color: #3fb6a8;
-    }
-
-    .rightbox {
-      float: left;
-      width: 60%;
-      height: 100%;
-    }
-
-    .profile {
-      position: relative;
-      width: 50%;
-      float:right;
-
-    }
-
-    h1 {
-      font-family: "Montserrat", sans-serif;
-      color: black;
-      font-size: 2em;
-      margin-top: 40px;
-      margin-bottom: 35px;
-    }
-
-    h2 {
-      color: #777;
-      font-family: "Roboto", sans-serif;
-      width: 80%;
-      text-transform: uppercase;
-      font-size: 14px;
-      letter-spacing: 1px;
-      margin-left: 2px;
-    }
-
-    p {
-      border-width: 1px;
-      border-style: solid;
-      border-image: linear-gradient(to right, #3fb6a8, rgba(126, 211, 134, 0.5)) 1
-        0%;
-      border-top: 0;
-      width: 80%;
-      font-family: "Montserrat", sans-serif;
-      font-size: 0.7em;
-      padding: 7px 0;
-      color: #070707;
-    }
-
-    .btn {
-      float: right;
-      font-family: "Roboto", sans-serif;
-      text-transform: uppercase;
-      font-size: 10px;
-      border: none;
-      color: #3fb6a8;
-    }
-
-    .btn:hover {
-      text-decoration: underline;
-      font-weight: 900;
-    }
-
-    .leftbox{
-      float: left;
-      width: 24%;
-      height: 100%;
-    }
-     .leftbox, .profile-picture {
-        text-align: center;
-        padding: 20px;
-        position: relative;
-    }
-
-    .profile-picture img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid white;
-    }
-
-
-</style>
 <body>
 	<div class="container">
 		<div class="leftbox">
@@ -116,38 +22,39 @@
 									 style="cursor: pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
 				</h1>
 				<h2>Full Name</h2>
-				<p>Hassnain Haider</p>
+				<p class="value" >Hassnain Haider</p>
 				<h2>Date Of Birth</h2>
-				<p>25-03-2003</p>
+				<p class="value">25-03-2003</p>
 				<h2>Gender</h2>
-				<p>Male</p>
+				<p class="value">Male</p>
 				<h2>Mobile</h2>
-				<p>+91 987654321</p>
+				<p class="value">+91 987654321</p>
 				<h2>Email</h2>
-				<p>example@example.com</p>
+				<p class="value">example@example.com</p>
 				<h2>Password</h2>
-				<p>
+				<p class="value">
 					********
 					<button class="btn">Change</button>
 				</p>
 			</div>
-			<div class="profile">
-				<h1>
-					Health Info <i class="fa fa-pencil-square-o"
-									 style="cursor: pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
-				</h1>
-				<h2>Is Your Weight less than 50kg?</h2>
-				<p>No</p>
-				<h2>Are You Suffering from any transmittable disease?</h2>
-				<p>No</p>
-				<h2>Are You Suffering from any of the below? </h2>
-				<p>No-other</p>
-				<h2>Are you Asthama patient? </h2>
-				<p>No</p>
+			<div  class="profile" >
+					<h1>
+						Health Info <i class="fa fa-pencil-square-o"
+										 style="cursor: pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#model-eligible"></i>
+					</h1>
+					<h2>Is Your Weight less than 50kg?</h2>
+					<p class="value" th:text="${eligibles.isWeight}"></p>
+					<h2>Are You Suffering from any transmittable disease?</h2>
+					<p class="value" th:text="${eligibles.isTransmittableDisease}"></p>
+					<h2>Are You Suffering from any of the below? </h2>
+					<p class="value" th:text="${eligibles.disease}"></p>
+					<h2>Are you Asthama patient? </h2>
+					<p class="value" th:text="${eligibles.isAsthama}"></p>
 			</div>
 		</div>
 	</div>
 	<div th:replace="editprofile :: editProfile"></div>
+	<div th:replace="eligible :: eligible"></div>
 	<script>
 	  document.getElementById('my_img').addEventListener('click', function(event) {
       	document.getElementById('my_file').click();
