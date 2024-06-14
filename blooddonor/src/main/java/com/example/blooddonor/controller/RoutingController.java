@@ -11,11 +11,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class RoutingController {
 	
-	@RequestMapping("/login")
-	public String login() {
-		return "index";
+	@RequestMapping("/index")
+	public String index() {
+		return "redirect:/bdonor?fragmentToLoad=main";
 	}
-	
+
 	@RequestMapping("/register")
 	public String register() {
 		return "register";
@@ -31,6 +31,12 @@ public class RoutingController {
 		session.setAttribute("role", "donor");
 		model.addAttribute("fragmentToLoad", fragmentToLoad);
 		return "home";
+	}
+
+	@RequestMapping("/bdonor")
+	public String donorIndex(@RequestParam(name = "fragmentToLoad") String fragmentToLoad,Model model,HttpSession session) {
+		model.addAttribute("fragmentToLoad", fragmentToLoad);
+		return "index";
 	}
 
 }

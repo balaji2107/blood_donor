@@ -29,15 +29,15 @@
 				<p class="value">Male</p>
 				<h2>Mobile</h2>
 				<p class="value">+91 987654321</p>
-				<h2>Email</h2>
-				<p class="value">example@example.com</p>
+				<h2>Address</h2>
+				<p class="value">Tamilnadu,Tenkasi</p>
 				<h2>Password</h2>
 				<p class="value">
 					********
 					<button class="btn">Change</button>
 				</p>
 			</div>
-			<div  class="profile" >
+			<div th:if="${session.role=='donor'}" class="profile" >
 					<h1>
 						Health Info <i class="fa fa-pencil-square-o"
 										 style="cursor: pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#model-eligible"></i>

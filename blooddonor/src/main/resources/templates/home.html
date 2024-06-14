@@ -41,6 +41,9 @@
     <div th:if="${fragmentToLoad == 'report'}">
         <div th:replace="report :: report"></div>
     </div>
+    <div th:if="${fragmentToLoad == 'patient'}">
+        <div th:replace="patient :: patient"></div>
+    </div>
 </div>
 
 

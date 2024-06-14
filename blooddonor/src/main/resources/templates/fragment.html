@@ -31,6 +31,11 @@
 					<svg class="bi me-2" width="16" height="16">
 						<use xlink:href="#grid"></use></svg> Patient Details
 			</a></li>
+			<li th:if="${session.role=='patient'}"><a
+					th:href="@{/home?fragmentToLoad=patient}" class="nav-link text-white">
+				<svg class="bi me-2" width="16" height="16">
+					<use xlink:href="#grid"></use></svg> Send Request
+			</a></li>
 			<li th:if="${session.role=='donor'}"><a th:href="@{/home?fragmentToLoad=bloodRequest}"
 				class="nav-link text-white"> <svg class="bi me-2" width="16"
 						height="16">
@@ -48,7 +53,7 @@
 				class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
 				id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 				<img src="avatar.png" alt="" width="32" height="32"
-				class="rounded-circle me-2" id="image"> <strong>mdo</strong>
+				class="rounded-circle me-2" id="image"> <strong th:text="${session.username}"></strong>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 				aria-labelledby="dropdownUser1">

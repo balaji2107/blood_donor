@@ -3,6 +3,7 @@ package com.example.blooddonor.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import com.example.blooddonor.dto.EligibleDTO;
 import com.example.blooddonor.model.Credential;
 import com.example.blooddonor.model.Eligible;
@@ -20,7 +21,6 @@ public class UserService implements IUserService{
 	
 	    @Autowired
 	    private UserRepo userRepository;
-
 		@Autowired
 		private CredentialRepo credentialRepo;
 
@@ -55,11 +55,14 @@ public class UserService implements IUserService{
 	@Override
 	public Credential authenticate(String email, String password) {
 		Credential credential = credentialRepo.findByEmail(email);
-		Optional<User> user=userRepository.findById(credential.getUser().getId());
-		if(user.isPresent()){
-			currentUser=user.get();
+		if(credential !=null && credentialRepo.findByPassword(password)!=null) {
+			Optional<User> user = userRepository.findById(credential.getUser().getId());
+			if (user.isPresent()) {
+				currentUser = user.get();
+			}
+			return credential;
 		}
-		return credential;
+		return null;
 	}
 
 	@Override

@@ -40,11 +40,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(CredentialDTO credential)  {
+    public String login(CredentialDTO credential,HttpSession session)  {
         String email = credential.getEmail();
         String password = credential.getPassword();
         Credential credential1=userBusinessService.authenticate(email,password);
         if(credential1 != null){
+            session.setAttribute("username",credential1.getUser().getUsername());
             return "redirect:/home?fragmentToLoad=dashboard";
         }else
          return "redirect:/login";
