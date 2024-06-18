@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.example.blooddonor.dto.CredentialDTO;
 import com.example.blooddonor.dto.EligibleDTO;
+import com.example.blooddonor.dto.FindBloodDonorRequest;
 import com.example.blooddonor.model.Credential;
 import com.example.blooddonor.model.Eligible;
+import com.example.blooddonor.service.IBloodGroupService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +32,7 @@ public class UserController {
     public String addUser(UserDTO userDTO)  {
         logger.info("Received addUser request: {}", userDTO);
         String newUser = userBusinessService.addUser(userDTO);
-        return "index";
+        return "redirect:/bdonor?fragmentToLoad=register";
     }
 
     @GetMapping("/getUser")
@@ -71,4 +73,10 @@ public class UserController {
         return "redirect:/home?fragmentToLoad=profile";
     }
 
+    @GetMapping("/onfindBloodDonor")
+    public void onfindBloodDonor(@ModelAttribute FindBloodDonorRequest request, HttpSession session)  {
+        int cityId = request.getCityId();
+        System.out.println("cityId "+cityId);
+
+    }
 }

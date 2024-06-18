@@ -87,7 +87,8 @@ public class UserService implements IUserService{
 
 	@Override
 	public Eligible getUserEligible() {
-        return eligibilityRepo.findByUserId(currentUser.getId());
+
+			return eligibilityRepo.findByUserId(currentUser.getId());
     }
 
 }

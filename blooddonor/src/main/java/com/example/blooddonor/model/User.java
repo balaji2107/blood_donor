@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
-        @UniqueConstraint(columnNames = "mobileNo")
+        @UniqueConstraint(columnNames = "mobileNo"),
+        @UniqueConstraint(columnNames = "email"),
 })
 @Data
 @NoArgsConstructor
@@ -33,6 +34,21 @@ public class User {
     @NotEmpty(message = "Mobile number is required")
     @Column(nullable = false, unique = true)
     private String mobileNo;
+
+    @Column(nullable = false, unique = true)
+    private String bloodGroup;
+
+    @Column(nullable = false, unique = true)
+    private String country;
+
+    @Column(nullable = false, unique = true)
+    private String statedrpdwn;
+
+    @Column(nullable = false, unique = true)
+    private String districtdrpdwn;
+
+    @Column(nullable = false, unique = true)
+    private String citydrpdwn;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;

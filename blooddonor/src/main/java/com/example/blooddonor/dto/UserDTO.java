@@ -18,5 +18,10 @@ public class UserDTO {
     private String role;
     private String email;
     private String mobileNo;
+    private String bloodGroup;
+    private String country;
+    private String statedrpdwn;
+    private String districtdrpdwn;
+    private String citydrpdwn;
     private User user;
 }

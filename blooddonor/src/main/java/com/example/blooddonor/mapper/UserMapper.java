@@ -14,6 +14,11 @@ public class UserMapper {
 	        return UserDTO.builder()
 	                .username(user.getUsername())
 					.mobileNo(user.getMobileNo())
+					.bloodGroup(user.getBloodGroup())
+					.country(user.getCountry())
+					.statedrpdwn(user.getStatedrpdwn())
+					.districtdrpdwn(user.getDistrictdrpdwn())
+					.citydrpdwn(user.getCitydrpdwn())
 	                .build();
 	    }
 
@@ -21,6 +26,11 @@ public class UserMapper {
 			return User.builder()
 					.username(userDTO.getUsername())
 					.mobileNo(userDTO.getMobileNo())
+					.bloodGroup(userDTO.getBloodGroup())
+					.country(userDTO.getCountry())
+					.statedrpdwn(userDTO.getStatedrpdwn())
+					.districtdrpdwn(userDTO.getDistrictdrpdwn())
+					.citydrpdwn(userDTO.getCitydrpdwn())
 					.build();
 	    }
 
@@ -29,7 +39,7 @@ public class UserMapper {
 		return Credential.builder()
 				.email(userDTO.getEmail())
 				.password(userDTO.getPassword())
-				.role(userDTO.getRole())
+//				.role(userDTO.getRole())
 				.user(user)
 				.build();
 	}
